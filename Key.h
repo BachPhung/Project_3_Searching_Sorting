@@ -1,19 +1,22 @@
-typedef int Key;
+#pragma once
+#include <iostream>
+using namespace std;
 
-class Key{
-    private:
-    int key;
-    public:
-    // Add any constructors and methods for key data.
-    static int comparisons;
-    Key (int x = 0);
-    int the_key() const;
+class Key {
+	int key;
+public:
+	static int comparisons;
+	static int assignments;
+	Key(int x = 0);
+	int the_key() const;
+	Key& operator = (const Key& original);
 };
 
- 
-bool operator== (const Key &x, const Key &y);
-bool operator> (const Key &x, const Key &y);
-bool operator< (const Key &x, const Key &y);
-bool operator>= (const Key &x, const Key &y);
-bool operator<= (const Key &x, const Key &y);
-bool operator!= (const Key &x, const Key &y);
+
+
+bool operator ==(const Key& x, const Key& y);
+bool operator >(const Key& x, const Key& y);
+bool operator <(const Key& x, const Key& y);
+bool operator >=(const Key& x, const Key& y);
+bool operator <=(const Key& x, const Key& y);
+bool operator !=(const Key& x, const Key& y);

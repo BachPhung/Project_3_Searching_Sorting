@@ -1,0 +1,1 @@
+enum Error_code { success,underflow, fail, rrange_error, overflow, not_present };
