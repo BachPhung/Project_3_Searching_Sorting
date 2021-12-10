@@ -48,3 +48,8 @@ bool operator!= (const Key& x, const Key& y) {
     Key::comparisons++;
     return x.the_key() != y.the_key();
 }
+
+ostream& operator << (ostream& os, const Key& k){
+    os << k.the_key();
+    return os;
+}

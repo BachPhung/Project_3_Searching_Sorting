@@ -20,3 +20,4 @@ bool operator <(const Key& x, const Key& y);
 bool operator >=(const Key& x, const Key& y);
 bool operator <=(const Key& x, const Key& y);
 bool operator !=(const Key& x, const Key& y);
+ostream& operator << (ostream& os, const Key& k);

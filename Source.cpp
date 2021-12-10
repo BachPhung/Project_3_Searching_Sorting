@@ -2,7 +2,8 @@
 #include "Ordered_list.h"
 #include"Random.h"
 #include"Timer.h"
-#include<string>
+#include"Sortable_list.h"
+#include<string.h>
 using namespace std;
 
 void print_out(std::string msg, const double& time, const int& comparisons, const int& searches);
@@ -28,15 +29,32 @@ int main() {
     int b;
     cout << "Insert the SIZE: ";
     cin >> MAX_SIZE;
-    Ordered_list li;
+    List<int>li;
+    Random number;
+    // Ordered_list li;
+    // for (int i = 0; i < MAX_SIZE; i++) {
+    //     key = new Key(2 * i + 1 );
+    //     li.insert(i,*key);
+    //     delete key;
+    // }
+    // cout << "Insert searches: ";
+    // cin >> b;
+    // test_search_2(b, li);
+
+    Sortable_list<Record> sort_li;
+    Timer clock;
     for (int i = 0; i < MAX_SIZE; i++) {
-        key = new Key(2 * i + 1 );
-        li.insert(i,*key);
+        int a = number.random_integer(0,10000);
+        key = new Key(a);
+        sort_li.insert(i,*key);
         delete key;
     }
-    cout << "Insert searches: ";
-    cin >> b;
-    test_search_2(b, li);
+    printList("\nBefore sort",sort_li);
+    sort_li.insertion_sort();
+    printList("\nAfter sort",sort_li);
+    cout <<"\n\n"<<clock.elapsed_time();
+    cout <<"\nKey::assignments: "<<Key::assignments;
+    cout <<"\nKey::comparisons: "<<Key::comparisons;
     return 0;
 }
 
@@ -142,7 +160,8 @@ Uses: Methods of the classes List, Random, and Timer,
     cout << "run_recursive_binary_1: " << endl << "_ _ _ _ _ _ _ _ _ _ _ " << endl;
     Key::comparisons = 0;
     clock.reset();
-    for (i = 0; i < searches; i++) {    
+    for (i = 0; i < searches; i++) {  
+          
         if (run_recursive_binary_1(the_list, odd_target[i], found_at) == not_present)
             cout << "Error: Failed to find expected target " << odd_target[i] << endl;
     }
@@ -213,14 +232,7 @@ Uses: Methods of the classes List, Random, and Timer,
     print_out("Unsuccessful", clock.elapsed_time(), Key::comparisons, searches);
     
 }
-void print_out(string msg, const double& time, const int& comparisons, const int& searches)
-{
-    cout.precision(15);
-    cout << "Status: " << msg << endl
-        << "Elapsed per search: " << fixed << time << endl
-        << "Compairisons per search: " << comparisons << endl
-        << "Searches: " << searches << endl << endl;
-}
+
 
 Error_code recursive_binary_1(const Ordered_list& the_list, const Key& target,
     int bottom, int top, int& position)
@@ -345,4 +357,13 @@ Error_code binary_search_2(const Ordered_list& the_list,
         else top = position - 1;
     }
     return not_present;
+}
+
+void print_out(std::string msg, const double& time, const int& comparisons, const int& searches)
+{
+    cout.precision(6);
+    cout << "Status: " << msg << endl
+        << "Elapsed per search: " << fixed << time << endl
+        << "Compairisons per search: " << comparisons << endl
+        << "Searches: " << searches << endl << endl;
 }

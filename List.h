@@ -53,6 +53,9 @@ void List<List_entry>::clear()
     count = 0;
 }
 
+
+
+
 template <typename List_entry>
 int List<List_entry>::size() const
 /*
@@ -218,5 +221,19 @@ Error_code List<List_entry>::remove(int position, List_entry& x)
     return success;
 }
 
+inline void write_entry(Record &num)
+{
+   cout << num << " ";
+}
 
-
+template <class List_entry> 
+void printList( const char *text , List<List_entry> &list )
+{
+	cout << text << endl;
+	if ( list.size() > 0 ) {
+		list.traverse(write_entry);
+		cout << endl;
+	}
+	else
+		cout << "Tyhja." << endl;
+}
