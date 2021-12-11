@@ -29,9 +29,8 @@ int main() {
     int b;
     cout << "Insert the SIZE: ";
     cin >> MAX_SIZE;
-    List<int>li;
     Random number;
-    // Ordered_list li;
+    Ordered_list li;
     // for (int i = 0; i < MAX_SIZE; i++) {
     //     key = new Key(2 * i + 1 );
     //     li.insert(i,*key);
@@ -50,9 +49,9 @@ int main() {
         delete key;
     }
     printList("\nBefore sort",sort_li);
-    sort_li.insertion_sort();
+    sort_li.quick_sort();
     printList("\nAfter sort",sort_li);
-    cout <<"\n\n"<<clock.elapsed_time();
+    cout <<"\n\nTime: "<<clock.elapsed_time();
     cout <<"\nKey::assignments: "<<Key::assignments;
     cout <<"\nKey::comparisons: "<<Key::comparisons;
     return 0;

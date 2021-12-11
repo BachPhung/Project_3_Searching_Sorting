@@ -103,9 +103,15 @@ Post: The action specified by function (*visit) has been performed on every
 entry of the List, beginning at position 0 and doing each in turn.
 
 */
-{
-    for (int i = 0; i < count; i++)
+{   
+    if(count < 200){
+        for (int i = 0; i < count; i++)
         (*visit)(entry[i]);
+    }
+    else{
+        for (int i = 0; i < 200; i++)
+        (*visit)(entry[i]);
+    }
 }
 
 template <typename List_entry>
