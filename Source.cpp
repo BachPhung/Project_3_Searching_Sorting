@@ -43,6 +43,7 @@ int main() {
             li.insert(i,*key);
             delete key;
         }
+        // Key::assignments-=MAX_SIZE;
         cout << "Insert searches: ";
         cin >> b;
         test_search(b, li);
@@ -70,7 +71,8 @@ int main() {
             key = new Key(a);
             sort_li.insert(i,*key);
             delete key;
-        }   
+        }
+        Key::assignments = 0; 
         printList("\nBefore sort",sort_li);
         sort_li.insertion_sort();
         printList("\nAfter sort",sort_li);
@@ -88,9 +90,10 @@ int main() {
             key = new Key(a);
             sort_li.insert(i,*key);
             delete key;
-        }   
+        }
+        Key::assignments = 0;
         printList("\nBefore sort",sort_li);
-        sort_li.insertion_sort();
+        sort_li.quick_sort();
         printList("\nAfter sort",sort_li);
         cout <<"\n\nTime: "<<clock.elapsed_time();
         cout <<"\nKey::assignments: "<<Key::assignments;
@@ -174,13 +177,13 @@ Uses: Methods of the classes List, Random, and Timer,
     Key::comparisons = 0;
     Random number;
     Timer clock;
-    int odd_target[1000];
+    int *odd_target = new int(1000);
     //int *odd_target = new int(searches);
     
     for (i = 0; i < searches; i++) {
         odd_target[i] = 2 * number.random_integer(0, list_size - 1) + 1;
     }
-    int even_target[1000];
+    int *even_target = new int(1000);
     //int *even_target = new int(searches);
     for (i = 0; i < searches; i++) {
         even_target[i] = 2 * number.random_integer(0, list_size);
