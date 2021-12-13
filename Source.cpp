@@ -4,10 +4,12 @@
 #include"Timer.h"
 #include"Sortable_list.h"
 #include<string.h>
+#include <climits>
 using namespace std;
 
 void print_out(std::string msg, const double& time, const int& comparisons, const int& searches);
 
+int chooseVersion();
 Error_code sequential_search(const List<Record>& the_list, const Key& target, int& position);
 Error_code recursive_binary_1(const Ordered_list& the_list, const Key& target,
     int bottom, int top, int& position);
@@ -27,34 +29,77 @@ int main() {
     int MAX_SIZE;
     Key* key;
     int b;
-    cout << "Insert the SIZE: ";
-    cin >> MAX_SIZE;
     Random number;
-    Ordered_list li;
-    // for (int i = 0; i < MAX_SIZE; i++) {
-    //     key = new Key(2 * i + 1 );
-    //     li.insert(i,*key);
-    //     delete key;
-    // }
-    // cout << "Insert searches: ";
-    // cin >> b;
-    // test_search_2(b, li);
-
-    Sortable_list<Record> sort_li;
-    Timer clock;
-    for (int i = 0; i < MAX_SIZE; i++) {
-        int a = number.random_integer(0,10000);
-        key = new Key(a);
-        sort_li.insert(i,*key);
-        delete key;
+    int option = chooseVersion();
+    cout << "Insert the SIZE: ";
+    cin >> MAX_SIZE; 
+    switch (option)
+    {
+    case 1:
+    {    
+        Ordered_list li;
+        for (int i = 0; i < MAX_SIZE; i++) {
+            key = new Key(2 * i + 1 );
+            li.insert(i,*key);
+            delete key;
+        }
+        cout << "Insert searches: ";
+        cin >> b;
+        test_search(b, li);
+        break;
     }
-    printList("\nBefore sort",sort_li);
-    sort_li.quick_sort();
-    printList("\nAfter sort",sort_li);
-    cout <<"\n\nTime: "<<clock.elapsed_time();
-    cout <<"\nKey::assignments: "<<Key::assignments;
-    cout <<"\nKey::comparisons: "<<Key::comparisons;
-    return 0;
+    case 2:
+    {   
+        Ordered_list li;
+         for (int i = 0; i < MAX_SIZE; i++) {
+            key = new Key(2 * i + 1 );
+            li.insert(i,*key);
+            delete key;
+        }
+        cout << "Insert searches: ";
+        cin >> b;
+        test_search_2(b, li);
+        break;
+    }
+    case 3:
+    {
+        Sortable_list<Record> sort_li;
+        Timer clock;
+        for (int i = 0; i < MAX_SIZE; i++) {
+            int a = number.random_integer(0,MAX_SIZE*2);
+            key = new Key(a);
+            sort_li.insert(i,*key);
+            delete key;
+        }   
+        printList("\nBefore sort",sort_li);
+        sort_li.insertion_sort();
+        printList("\nAfter sort",sort_li);
+        cout <<"\n\nTime: "<<clock.elapsed_time();
+        cout <<"\nKey::assignments: "<<Key::assignments;
+        cout <<"\nKey::comparisons: "<<Key::comparisons;
+        break;
+    }
+    case 4:
+    {
+         Sortable_list<Record> sort_li;
+        Timer clock;
+        for (int i = 0; i < MAX_SIZE; i++) {
+            int a = number.random_integer(0,MAX_SIZE*2);
+            key = new Key(a);
+            sort_li.insert(i,*key);
+            delete key;
+        }   
+        printList("\nBefore sort",sort_li);
+        sort_li.insertion_sort();
+        printList("\nAfter sort",sort_li);
+        cout <<"\n\nTime: "<<clock.elapsed_time();
+        cout <<"\nKey::assignments: "<<Key::assignments;
+        cout <<"\nKey::comparisons: "<<Key::comparisons;
+        break;
+    }
+    default:
+        break;
+    }
 }
 
 Error_code sequential_search(const List<Record>& the_list, const Key& target, int& position) {
@@ -365,4 +410,39 @@ void print_out(std::string msg, const double& time, const int& comparisons, cons
         << "Elapsed per search: " << fixed << time << endl
         << "Compairisons per search: " << comparisons << endl
         << "Searches: " << searches << endl << endl;
+}
+
+int chooseVersion()
+{
+    int userChoise;
+
+    bool acceptable = false;
+
+    while (true)
+    {
+
+        cout << "Welcome to Search / Sorting Algorithms.\n\n"
+            << "1: Part 1: Sequence Search\n"
+            << "2: Part 2: Binary Search\n"
+            << "3: Part 3: Insertion Sort\n"
+            << "4: Part 4: Quick \n"
+            << "Input: "
+            << flush;
+
+        if (cin >> userChoise)
+        {
+            if (userChoise == 1 || userChoise == 2 || userChoise == 3 || userChoise == 4 || userChoise == 5)
+            {
+                return userChoise;
+            }
+        }
+        else
+        {
+            // clear error from cin so it works correctly when asking again.
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+        }
+    }
+
+    return userChoise;
 }
