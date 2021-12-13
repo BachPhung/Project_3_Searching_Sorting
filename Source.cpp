@@ -177,13 +177,13 @@ Uses: Methods of the classes List, Random, and Timer,
     Key::comparisons = 0;
     Random number;
     Timer clock;
-    int *odd_target = new int(1000);
+    int odd_target[1000];
     //int *odd_target = new int(searches);
     
     for (i = 0; i < searches; i++) {
         odd_target[i] = 2 * number.random_integer(0, list_size - 1) + 1;
     }
-    int *even_target = new int(1000);
+    int even_target[1000];
     //int *even_target = new int(searches);
     for (i = 0; i < searches; i++) {
         even_target[i] = 2 * number.random_integer(0, list_size);
@@ -428,7 +428,7 @@ int chooseVersion()
             << "1: Part 1: Sequence Search\n"
             << "2: Part 2: Binary Search\n"
             << "3: Part 3: Insertion Sort\n"
-            << "4: Part 4: Quick \n"
+            << "4: Part 4: Quick Sort\n"
             << "Input: "
             << flush;
 
